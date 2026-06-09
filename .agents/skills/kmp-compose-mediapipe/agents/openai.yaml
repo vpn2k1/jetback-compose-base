@@ -1,0 +1,8 @@
+interface:
+  display_name: "KMP Compose MediaPipe"
+  short_description: "Repository workflow for Kotlin Multiplatform, Compose, and MediaPipe changes."
+  brand_color: "#2563EB"
+  default_prompt: "Use this repository skill when modifying Kotlin Multiplatform, Compose UI, MediaPipe features, or Gradle validation."
+
+policy:
+  allow_implicit_invocation: true
