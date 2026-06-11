@@ -12,27 +12,29 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.namvu.myapplication.ui.base.theme.AppThemeDefaults
 
 @Composable
 fun AppCard(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null,
-    contentPadding: PaddingValues = PaddingValues(16.dp),
+    contentPadding: PaddingValues? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
+    val resolvedContentPadding = contentPadding ?: PaddingValues(AppThemeDefaults.spacing.lg)
+
     Card(
         modifier = modifier
             .fillMaxWidth()
             .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(AppThemeDefaults.dimens.cardRadius),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = AppThemeDefaults.spacing.xs),
     ) {
         Column(
-            modifier = Modifier.padding(contentPadding),
+            modifier = Modifier.padding(resolvedContentPadding),
             content = content,
         )
     }

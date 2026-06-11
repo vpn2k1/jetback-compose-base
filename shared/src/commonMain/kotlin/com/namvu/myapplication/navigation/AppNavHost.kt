@@ -7,12 +7,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.namvu.myapplication.ui.home.HomeScreen
+import com.namvu.myapplication.ui.base.theme.AppThemeMode
+import com.namvu.myapplication.ui.budget.BudgetScreen
+import com.namvu.myapplication.ui.expenses.ExpensesScreen
+import com.namvu.myapplication.ui.report.ReportScreen
 import com.namvu.myapplication.ui.settings.SettingsScreen
 
 @Composable
 fun AppNavHost(
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier,
+    themeMode: AppThemeMode,
+    onThemeModeChange: (AppThemeMode) -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -22,8 +28,20 @@ fun AppNavHost(
         composable(AppRoute.Home.route) {
             HomeScreen()
         }
+        composable(AppRoute.Expenses.route) {
+            ExpensesScreen()
+        }
+        composable(AppRoute.Reports.route) {
+            ReportScreen()
+        }
+        composable(AppRoute.Budgets.route) {
+            BudgetScreen()
+        }
         composable(AppRoute.Settings.route) {
-            SettingsScreen()
+            SettingsScreen(
+                themeMode = themeMode,
+                onThemeModeChange = onThemeModeChange,
+            )
         }
     }
 }

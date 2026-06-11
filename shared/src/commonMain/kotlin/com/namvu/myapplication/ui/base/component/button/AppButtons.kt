@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -33,6 +34,7 @@ fun AppButton(
             .then(if (fullWidth) Modifier.fillMaxWidth() else Modifier)
             .defaultMinSize(minHeight = AppThemeDefaults.dimens.buttonHeight),
         enabled = enabled && !isLoading,
+        shape = RoundedCornerShape(AppThemeDefaults.dimens.buttonRadius),
     ) {
         AppButtonContent(text = text, isLoading = isLoading)
     }
@@ -53,6 +55,7 @@ fun AppOutlinedButton(
             .then(if (fullWidth) Modifier.fillMaxWidth() else Modifier)
             .defaultMinSize(minHeight = AppThemeDefaults.dimens.buttonHeight),
         enabled = enabled && !isLoading,
+        shape = RoundedCornerShape(AppThemeDefaults.dimens.buttonRadius),
     ) {
         AppButtonContent(text = text, isLoading = isLoading)
     }
@@ -69,6 +72,7 @@ fun AppTextButton(
         onClick = onClick,
         modifier = modifier.defaultMinSize(minHeight = AppThemeDefaults.dimens.compactButtonHeight),
         enabled = enabled,
+        shape = RoundedCornerShape(AppThemeDefaults.dimens.compactButtonRadius),
     ) {
         Text(text = text)
     }
@@ -89,6 +93,7 @@ fun AppDestructiveButton(
             .then(if (fullWidth) Modifier.fillMaxWidth() else Modifier)
             .defaultMinSize(minHeight = AppThemeDefaults.dimens.buttonHeight),
         enabled = enabled && !isLoading,
+        shape = RoundedCornerShape(AppThemeDefaults.dimens.buttonRadius),
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.error,
             contentColor = MaterialTheme.colorScheme.onError,
@@ -104,7 +109,7 @@ private fun AppButtonContent(
     isLoading: Boolean,
 ) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(AppThemeDefaults.spacing.sm),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (isLoading) {
