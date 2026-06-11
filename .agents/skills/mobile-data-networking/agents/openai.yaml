@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mobile Data Networking"
+  short_description: "Build safe API, repository, persistence, cache, auth, and offline data flows."
+  default_prompt: "Use this skill for mobile networking, repositories, DTO/domain mapping, persistence, caching, auth token handling, and tests."
+
+policy:
+  allow_implicit_invocation: true

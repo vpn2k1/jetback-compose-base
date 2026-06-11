@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mobile Testing Release"
+  short_description: "Plan and run mobile tests, build validation, CI, and release readiness checks."
+  default_prompt: "Use this skill for testing, build validation, CI checks, release readiness, versioning, signing, crash reporting, and deployment risk."
+
+policy:
+  allow_implicit_invocation: true

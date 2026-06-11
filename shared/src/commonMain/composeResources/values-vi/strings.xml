@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_ok">Đồng ý</string>
+    <string name="common_cancel">Hủy</string>
+    <string name="common_close">Đóng</string>
+    <string name="common_save">Lưu</string>
+    <string name="common_delete">Xóa</string>
+    <string name="common_edit">Sửa</string>
+    <string name="common_retry">Thử lại</string>
+    <string name="common_done">Xong</string>
+    <string name="common_back">Quay lại</string>
+    <string name="common_next">Tiếp theo</string>
+    <string name="common_search">Tìm kiếm</string>
+    <string name="common_clear">Xóa</string>
+    <string name="common_loading">Đang tải...</string>
+    <string name="common_error">Đã xảy ra lỗi</string>
+    <string name="common_empty">Chưa có nội dung</string>
+    <string name="common_no_data">Không có dữ liệu</string>
+    <string name="common_network_error">Kiểm tra kết nối và thử lại.</string>
+    <string name="common_unknown_error">Lỗi không xác định</string>
+    <string name="common_permission_denied">Quyền truy cập bị từ chối</string>
+    <string name="common_coming_soon">Sắp ra mắt</string>
+    <string name="common_required">Bắt buộc</string>
+    <string name="common_confirm">Xác nhận</string>
+    <string name="common_dismiss">Bỏ qua</string>
+</resources>

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mobile UI Quality"
+  short_description: "Improve mobile UI polish, accessibility, adaptive layout, and screen states."
+  default_prompt: "Use this skill to implement or review a production-quality mobile UI with accessibility, responsive layout, dark mode, and complete states."
+
+policy:
+  allow_implicit_invocation: true

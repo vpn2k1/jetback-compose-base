@@ -1,0 +1,7 @@
+interface:
+  display_name: "Base Kotlin Multiplatform"
+  short_description: "Workflow for base KMP and Compose Multiplatform app changes."
+  default_prompt: "Use this skill for Kotlin Multiplatform structure, shared Compose UI, platform source sets, Gradle configuration, and validation."
+
+policy:
+  allow_implicit_invocation: true

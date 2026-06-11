@@ -1,0 +1,59 @@
+prefix_rule(
+    pattern = ["git", "status"],
+    decision = "allow",
+    justification = "Reading repository status is safe.",
+    match = [
+        "git status",
+        "git status --short",
+    ],
+)
+
+prefix_rule(
+    pattern = ["git", "diff"],
+    decision = "allow",
+    justification = "Reading diffs is safe.",
+    match = [
+        "git diff",
+        "git diff --stat",
+    ],
+)
+
+prefix_rule(
+    pattern = ["./gradlew"],
+    decision = "prompt",
+    justification = "Gradle commands may download dependencies, run long builds, or write build outputs.",
+    match = [
+        "./gradlew :shared:jvmTest",
+        "./gradlew :androidApp:assembleDebug",
+        "./gradlew :shared:jvmTest :androidApp:assembleDebug",
+    ],
+)
+
+prefix_rule(
+    pattern = ["./gradlew", "clean"],
+    decision = "prompt",
+    justification = "Cleaning build outputs is allowed with confirmation.",
+    match = [
+        "./gradlew clean",
+    ],
+)
+
+prefix_rule(
+    pattern = ["rm"],
+    decision = "forbidden",
+    justification = "Ask the user before deleting files; prefer non-destructive edits.",
+    match = [
+        "rm file.txt",
+        "rm -rf build",
+    ],
+)
+
+prefix_rule(
+    pattern = ["git", "reset"],
+    decision = "forbidden",
+    justification = "Never reset repository state unless the user explicitly requests it.",
+    match = [
+        "git reset --hard",
+        "git reset HEAD~1",
+    ],
+)

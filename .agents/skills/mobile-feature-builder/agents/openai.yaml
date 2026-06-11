@@ -1,0 +1,7 @@
+interface:
+  display_name: "Mobile Feature Builder"
+  short_description: "Create production-shaped mobile features, screens, state, navigation, and tests."
+  default_prompt: "Use this skill to add or expand a mobile feature with proper state, UI boundaries, routing, platform hooks, and validation."
+
+policy:
+  allow_implicit_invocation: true
