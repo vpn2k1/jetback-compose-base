@@ -23,4 +23,8 @@
     <string name="common_required">Bắt buộc</string>
     <string name="common_confirm">Xác nhận</string>
     <string name="common_dismiss">Bỏ qua</string>
+    <string name="tab_home">Trang chủ</string>
+    <string name="tab_settings">Cài đặt</string>
+    <string name="home_title">Trang chủ</string>
+    <string name="settings_title">Cài đặt</string>
 </resources>
