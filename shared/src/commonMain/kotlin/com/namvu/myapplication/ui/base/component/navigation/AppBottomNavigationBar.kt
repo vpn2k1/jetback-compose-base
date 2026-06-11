@@ -29,6 +29,7 @@ fun AppBottomNavigationBar(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = NavigationBarDefaults.Elevation,
+        windowInsets = NavigationBarDefaults.windowInsets,
     ) {
         tabs.forEach { tab ->
             NavigationBarItem(
