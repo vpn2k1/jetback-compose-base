@@ -13,8 +13,8 @@ Keep files small enough to scan and review quickly.
 - Split by responsibility, not arbitrary line count.
 - For Compose UI, follow `.agents/rules/ui-module-structure.md`:
   - main screen shell in `ui/<feature>/<ScreenName>.kt`
-  - repeated leaf UI in `ui/<feature>/items/`
-  - larger screen sections in `ui/<feature>/modules/`
+  - screen-owned UI composables in `ui/<feature>/items/`
+  - item-specific helper functions and UI-state mapping in `ui/<feature>/modules/`
 - For domain/data code, split by main public type or cohesive behavior:
   - models in focused model files
   - repository contracts separate from implementations
