@@ -14,6 +14,8 @@ Keep the codebase easy to reason about across Kotlin Multiplatform targets.
 - Route-level code wires navigation, dependencies, state collection, and effects.
 - Screen-level code renders state and exposes callbacks.
 - Leaf UI renders focused pieces with narrow props.
+- Compose screen folders follow `.agents/rules/ui-module-structure.md`: main screen file at `ScreenName/ScreenName.kt`, repeated leaf UI under `items/`, larger screen sections under `modules/`.
+- Keep files focused and within the `.agents/rules/file-size.md` guideline: prefer 150-200 lines, split files over 200 lines by responsibility.
 - Repositories coordinate data sources and map external data.
 - DTOs should not leak deeply into UI unless the existing project intentionally follows that style.
 

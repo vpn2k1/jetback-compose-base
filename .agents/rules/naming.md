@@ -6,6 +6,9 @@ Use these conventions unless nearby code clearly uses a different local pattern.
 
 - Use lowercase package names.
 - Keep files close to the feature or platform source set they belong to.
+- For Compose screens, follow `.agents/rules/ui-module-structure.md`: each screen gets a `ScreenName/ScreenName.kt` main file plus `items/` and `modules/` subfolders for child UI.
+- Child item/module files and composables must include the parent screen name, for example `HomeScreenExpenseItem` or `HomeScreenBudgetModule`.
+- Keep file size aligned with `.agents/rules/file-size.md`: prefer 150-200 lines and split files over 200 lines into focused files.
 - Name files after the main public type or screen they contain.
 - Use suffixes consistently:
   - `Screen` for stateless screen composables.

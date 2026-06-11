@@ -14,6 +14,8 @@
 - Add or update `expect`/`actual` declarations only when a platform needs native behavior.
 - Keep Compose UI state explicit and stable; prefer small state holder/controller changes over large screen rewrites.
 - Use existing package names, naming style, and feature structure before introducing new folders.
+- For Compose UI screens, follow `.agents/rules/ui-module-structure.md`: `ScreenName/ScreenName.kt`, `ScreenName/items`, and `ScreenName/modules`; child item/module names include the parent screen name.
+- Keep source files focused; follow `.agents/rules/file-size.md` and split files that grow beyond 200 lines when reasonable.
 - Do not remove generated app icons, model assets, Gradle wrapper files, or Xcode project files unless the user asks for that cleanup.
 - Ask before adding new production dependencies or downloading large model files.
 - Apply the coding rules under `.agents/rules` when naming, modeling state, designing UI, and organizing architecture.
@@ -52,6 +54,6 @@
 ## Agent Reference Layout
 
 - `.agents/skills`: Codex skills and task workflows.
-- `.agents/rules`: repository coding rules such as naming, state management, architecture, UI, testing, and security.
+- `.agents/rules`: repository coding rules such as naming, file size, UI module structure, state management, architecture, UI, testing, and security.
 - `.agents/knowledge`: Kotlin and Jetpack Compose reference notes to load only when needed.
 - `.codex/rules`: Codex command execution policy, not coding style rules.
