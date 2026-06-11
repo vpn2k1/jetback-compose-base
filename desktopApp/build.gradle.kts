@@ -17,11 +17,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.namvu.myapplication.MainKt"
+        mainClass = "com.namvu.note.app.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.namvu.myapplication"
+            packageName = "com.namvu.note.app"
             packageVersion = "1.0.0"
         }
     }

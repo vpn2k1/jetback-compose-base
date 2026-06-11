@@ -21,11 +21,11 @@ dependencies {
 }
 
 android {
-    namespace = "com.namvu.myapplication"
+    namespace = "com.namvu.note.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.namvu.myapplication"
+        applicationId = "com.namvu.note.app"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

@@ -31,7 +31,7 @@ kotlin {
     }
     
     androidLibrary {
-       namespace = "com.namvu.myapplication.shared"
+       namespace = "com.namvu.note.app.shared"
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
     
