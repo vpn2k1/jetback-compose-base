@@ -16,8 +16,6 @@ kotlin = "2.3.21"
 kotlin-wrappers = "2026.5.3"
 kotlinx-coroutines = "1.11.0"
 material3 = "1.11.0-alpha07"
-mediapipe = "0.10.14"
-camera = "1.6.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -40,16 +38,6 @@ compose-components-resources = { module = "org.jetbrains.compose.components:comp
 compose-uiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
 kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 wrappers-browser = { module = "org.jetbrains.kotlin-wrappers:kotlin-browser", version.ref = "kotlin-wrappers" }
-mediapipe-genai-android = { module = "com.google.mediapipe:tasks-genai", version.ref = "mediapipe" }
-mediapipe-tasks-vision = { module = "com.google.mediapipe:tasks-vision", version.ref = "mediapipe" }
-mediapipe-tasks-text = { module = "com.google.mediapipe:tasks-text", version.ref = "mediapipe" }
-mediapipe-tasks-audio = { module = "com.google.mediapipe:tasks-audio", version.ref = "mediapipe" }
-mediapipe-tasks-vision-image-generator = { module = "com.google.mediapipe:tasks-vision-image-generator", version.ref = "mediapipe" }
-androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "camera" }
-androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camera" }
-androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camera" }
-androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camera" }
-androidx-camera-video = { module = "androidx.camera:camera-video", version.ref = "camera" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -6,7 +6,7 @@
 - Shared Compose Multiplatform UI and business logic live under `shared/src/commonMain/kotlin/com/namvu/myapplication`.
 - Platform-specific implementations live in the matching source sets, for example `androidMain`, `iosMain`, `jvmMain`, `jsMain`, and `wasmJsMain`.
 - Android app entry code lives in `androidApp`; iOS entry code lives in `iosApp`; desktop entry code lives in `desktopApp`; web entry code lives in `webApp`.
-- MediaPipe model assets are stored in `shared/src/androidMain/assets` and are also managed by the `downloadMediaPipeModels` Gradle task.
+- Reusable base UI components, theme tokens, state models, and localized strings live under `shared/src/commonMain`.
 
 ## Working Rules
 
