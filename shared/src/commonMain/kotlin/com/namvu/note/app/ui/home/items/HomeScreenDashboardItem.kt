@@ -1,6 +1,7 @@
 package com.namvu.note.app.ui.home.items
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,9 +28,13 @@ internal fun HomeScreenDashboardItem(
     modifier: Modifier = Modifier,
 ) {
     val expenseCount = state.expenses.size
+    val name = state.syncSession.account?.displayName
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Column {
-            Text("Good Morning, Nam", style = MaterialTheme.typography.headlineSmall)
+            Box(modifier = Modifier.fillMaxWidth()) {
+
+            }
+            Text("Good Morning $name", style = MaterialTheme.typography.headlineSmall)
             Text("Track money. Own your data.", color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         HomeScreenBudgetItem(totalMinor = totalMinor, expenseCount = expenseCount)

@@ -28,7 +28,19 @@ class GoogleSyncUseCases(
         return googleService.getSession()
     }
 
+    suspend fun disconnect(): GoogleSyncSession {
+        googleService.disconnect()
+        return googleService.getSession()
+    }
+
+    suspend fun requestSheetsAccess(): GoogleSyncSession {
+        requireSignedIn(googleService.getSession())
+        googleService.requestSheetsAccess()
+        return googleService.getSession()
+    }
+
     suspend fun connectExpenseJournalSpreadsheet(): GoogleSpreadsheet {
+        ensureSheetsAccess(googleService.getSession())
         val existing = googleService.findSpreadsheet(EXPENSE_JOURNAL_SPREADSHEET_NAME)
         return if (existing != null) {
             googleService.selectSpreadsheet(existing.id)
@@ -41,7 +53,8 @@ class GoogleSyncUseCases(
         val session = googleService.getSession()
         require(session.isSignedIn) { "Sign in with Google before syncing" }
 
-        val spreadsheet = session.spreadsheet ?: connectExpenseJournalSpreadsheet()
+        ensureSheetsAccess(session)
+        val spreadsheet = googleService.getSession().spreadsheet ?: connectExpenseJournalSpreadsheet()
         val categories = repository.getCategories().associateBy { it.id }
         val pendingExpenses = repository.getPendingSyncExpenses()
         var uploaded = 0
@@ -85,6 +98,17 @@ class GoogleSyncUseCases(
     suspend fun retryFailedSync(): SyncSummary {
         repository.resetFailedExpenseSync()
         return syncPendingExpenses()
+    }
+
+    private fun requireSignedIn(session: GoogleSyncSession) {
+        require(session.isSignedIn) { "Sign in with Google before syncing" }
+    }
+
+    private suspend fun ensureSheetsAccess(session: GoogleSyncSession) {
+        requireSignedIn(session)
+        if (!session.hasSheetsAccess) {
+            googleService.requestSheetsAccess()
+        }
     }
 
     private companion object {

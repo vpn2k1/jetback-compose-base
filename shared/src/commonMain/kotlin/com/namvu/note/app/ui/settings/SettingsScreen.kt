@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SegmentedButton
@@ -13,17 +14,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.namvu.note.app.expense.domain.sync.GoogleSyncSession
+import com.namvu.note.app.ui.base.component.button.AppDestructiveButton
 import com.namvu.note.app.ui.base.component.list.AppListItem
 import com.namvu.note.app.ui.base.component.surface.AppCard
+import com.namvu.note.app.ui.base.localization.AppLanguage
+import com.namvu.note.app.ui.base.localization.AppText
+import com.namvu.note.app.ui.base.localization.text
 import com.namvu.note.app.ui.base.theme.AppThemeMode
-import myapplication.shared.generated.resources.Res
-import myapplication.shared.generated.resources.settings_title
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SettingsScreen(
+    googleSession: GoogleSyncSession,
+    isGoogleActionRunning: Boolean,
+    googleErrorMessage: String?,
+    onGoogleSignOutClick: () -> Unit,
     themeMode: AppThemeMode,
     onThemeModeChange: (AppThemeMode) -> Unit,
+    appLanguage: AppLanguage,
+    onAppLanguageChange: (AppLanguage) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -33,14 +42,14 @@ fun SettingsScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = stringResource(Res.string.settings_title),
+            text = appLanguage.text(AppText.SettingsTitle),
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.SemiBold,
         )
         AppCard {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Text(
-                    text = "Theme",
+                    text = appLanguage.text(AppText.Theme),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                 )
@@ -54,45 +63,97 @@ fun SettingsScreen(
                                 count = AppThemeMode.entries.size,
                             ),
                         ) {
-                            Text(text = mode.name)
+                            Text(text = appLanguage.themeText(mode))
                         }
                     }
                 }
             }
         }
         AppCard {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(
+                    text = appLanguage.text(AppText.Language),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
+                SingleChoiceSegmentedButtonRow {
+                    AppLanguage.entries.forEachIndexed { index, language ->
+                        SegmentedButton(
+                            selected = appLanguage == language,
+                            onClick = { onAppLanguageChange(language) },
+                            shape = SegmentedButtonDefaults.itemShape(
+                                index = index,
+                                count = AppLanguage.entries.size,
+                            ),
+                        ) {
+                            Text(text = language.label)
+                        }
+                    }
+                }
+            }
+        }
+        AppCard {
+            val account = googleSession.account
             AppListItem(
-                title = "Google Sheets",
-                subtitle = "Expense changes stay local first, then sync through the pending queue when a spreadsheet is connected.",
+                title = appLanguage.text(AppText.GoogleSheets),
+                subtitle = googleSession.spreadsheet?.let { spreadsheet ->
+                    appLanguage.text(AppText.GoogleSheetsConnected).format(spreadsheet.name)
+                } ?: appLanguage.text(AppText.GoogleSheetsLocalFirst),
+            )
+            if (account == null) {
+                AppListItem(
+                    title = appLanguage.text(AppText.GoogleAccount),
+                    subtitle = appLanguage.text(AppText.GoogleNoAccount),
+                )
+            } else {
+                AppListItem(
+                    title = account.displayName,
+                    subtitle = account.email,
+                    overline = appLanguage.text(AppText.GoogleAccountOverline),
+                )
+                AppDestructiveButton(
+                    text = appLanguage.text(AppText.SignOut),
+                    onClick = onGoogleSignOutClick,
+                    isLoading = isGoogleActionRunning,
+                    fullWidth = true,
+                )
+            }
+            if (googleErrorMessage != null) {
+                Text(
+                    text = googleErrorMessage,
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error,
+                )
+            }
+            AppListItem(
+                title = appLanguage.text(AppText.Currency),
+                subtitle = appLanguage.text(AppText.CurrencyVnd),
             )
             AppListItem(
-                title = "Google Account",
-                subtitle = "Connected account, spreadsheet, sync status",
+                title = appLanguage.text(AppText.Notifications),
+                subtitle = appLanguage.text(AppText.NotificationsSubtitle),
             )
             AppListItem(
-                title = "Currency",
-                subtitle = "Vietnamese dong (VND)",
+                title = appLanguage.text(AppText.Privacy),
+                subtitle = appLanguage.text(AppText.PrivacySubtitle),
             )
             AppListItem(
-                title = "Language",
-                subtitle = "English, Vietnamese",
+                title = appLanguage.text(AppText.Backup),
+                subtitle = appLanguage.text(AppText.BackupSubtitle),
             )
             AppListItem(
-                title = "Notifications",
-                subtitle = "Budget alerts and sync reminders",
-            )
-            AppListItem(
-                title = "Privacy",
-                subtitle = "Local-first data, user-owned Sheets backup",
-            )
-            AppListItem(
-                title = "Backup",
-                subtitle = "Manual sync and restore foundation",
-            )
-            AppListItem(
-                title = "About",
-                subtitle = "Expense Journal",
+                title = appLanguage.text(AppText.About),
+                subtitle = appLanguage.text(AppText.AboutSubtitle),
             )
         }
+    }
+}
+
+private fun AppLanguage.themeText(mode: AppThemeMode): String {
+    return when (mode) {
+        AppThemeMode.System -> text(AppText.System)
+        AppThemeMode.Light -> text(AppText.Light)
+        AppThemeMode.Dark -> text(AppText.Dark)
     }
 }

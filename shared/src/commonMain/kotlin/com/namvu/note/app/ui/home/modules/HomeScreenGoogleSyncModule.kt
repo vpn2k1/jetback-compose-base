@@ -21,8 +21,8 @@ internal fun homeScreenGoogleSyncUiState(
     return HomeScreenGoogleSyncUiState(
         description = when {
             account == null -> "Sign in to connect your user-owned spreadsheet."
-            spreadsheet == null -> "Signed in as ${account.email}. Connect Expense Journal."
-            else -> "Connected to ${spreadsheet.name}."
+            spreadsheet == null -> "Signed in as ${account.displayName} (${account.email}). Connect Expense Journal."
+            else -> "Signed in as ${account.displayName} (${account.email}). Connected to ${spreadsheet.name}."
         },
         statusText = when {
             failedSyncCount > 0 -> "$failedSyncCount failed"

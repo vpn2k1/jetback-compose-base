@@ -43,6 +43,16 @@ class ExpenseUseCases(
         return loadJournal()
     }
 
+    suspend fun disconnectGoogle(): ExpenseJournal {
+        googleSyncUseCases.disconnect()
+        return loadJournal()
+    }
+
+    suspend fun requestGoogleSheetsAccess(): ExpenseJournal {
+        googleSyncUseCases.requestSheetsAccess()
+        return loadJournal()
+    }
+
     suspend fun connectSpreadsheet(): ExpenseJournal {
         googleSyncUseCases.connectExpenseJournalSpreadsheet()
         return loadJournal()

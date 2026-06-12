@@ -9,6 +9,7 @@ import com.namvu.note.app.expense.domain.sync.ExpenseSheetMapper
 import com.namvu.note.app.expense.domain.usecase.GoogleSyncUseCases
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 
 class GoogleSyncUseCasesTest {
@@ -89,5 +90,53 @@ class GoogleSyncUseCasesTest {
 
         assertEquals("2024-01", monthKey)
         assertNotNull(monthKey)
+    }
+
+    @Test
+    fun connectSpreadsheetRequiresGoogleSignIn() = runSuspending {
+        val repository = LocalExpenseRepository(InMemoryLocalExpenseDatabase())
+        val sync = GoogleSyncUseCases(
+            repository = repository,
+            googleService = InMemoryGoogleEcosystemService(),
+        )
+
+        assertFailsWith<IllegalArgumentException> {
+            sync.connectExpenseJournalSpreadsheet()
+        }
+    }
+
+    @Test
+    fun connectSpreadsheetRequestsSheetsAccessWhenNeeded() = runSuspending {
+        val repository = LocalExpenseRepository(InMemoryLocalExpenseDatabase())
+        val sync = GoogleSyncUseCases(
+            repository = repository,
+            googleService = InMemoryGoogleEcosystemService(),
+        )
+
+        sync.signIn()
+        val spreadsheet = sync.connectExpenseJournalSpreadsheet()
+        val session = sync.loadSession()
+
+        assertEquals("Expense Journal", spreadsheet.name)
+        assertEquals(true, session.hasSheetsAccess)
+        assertEquals(spreadsheet.id, session.spreadsheet?.id)
+    }
+
+    @Test
+    fun disconnectClearsAccountSpreadsheetAndSheetsAccess() = runSuspending {
+        val repository = LocalExpenseRepository(InMemoryLocalExpenseDatabase())
+        val sync = GoogleSyncUseCases(
+            repository = repository,
+            googleService = InMemoryGoogleEcosystemService(),
+        )
+
+        sync.signIn()
+        sync.connectExpenseJournalSpreadsheet()
+
+        val session = sync.disconnect()
+
+        assertEquals(null, session.account)
+        assertEquals(null, session.spreadsheet)
+        assertEquals(false, session.hasSheetsAccess)
     }
 }

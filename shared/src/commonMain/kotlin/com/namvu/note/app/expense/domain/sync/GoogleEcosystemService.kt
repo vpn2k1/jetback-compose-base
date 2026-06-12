@@ -4,6 +4,8 @@ interface GoogleEcosystemService {
     suspend fun getSession(): GoogleSyncSession
     suspend fun signIn(): GoogleAccount
     suspend fun signOut()
+    suspend fun disconnect()
+    suspend fun requestSheetsAccess(): GoogleAccessGrant
     suspend fun findSpreadsheet(name: String): GoogleSpreadsheet?
     suspend fun createSpreadsheet(name: String): GoogleSpreadsheet
     suspend fun selectSpreadsheet(spreadsheetId: String): GoogleSpreadsheet
